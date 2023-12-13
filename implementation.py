@@ -1,7 +1,7 @@
 import data_prep as dp
 import nn_source as nn
 import pickle as pkl
-
+import random
 (x_train, y_train), (x_test, y_test) = dp.MnistDataloader().return_clean_data()
                                     # this list comprehension is turning a digit into its one-hot representation
 training_data: [([float], [float])] = [(x_train[i]/255, [1 if j == y_train[i] else 0 for j in range(10)]) for i in range(1000)]
@@ -17,10 +17,10 @@ def train_network(epochs: int, learning_rate: float):
             network.backpropagate(data_point, learning_rate)
         with open("serialization\\network.pkl", "wb") as file:
             pkl.dump(network, file)
-    print("Average error: ",network.calculate_average_output_error(training_data[random.randint(0, len(training_data)-1)]))
+        print("Average error: ",network.calculate_average_output_error(training_data[random.randint(0, len(training_data)-1)]))
     print(len(x_train))
 #print(list(training_data[0][0]))
-train_network(1, 0.01)
+train_network(50, 0.01)
 
 with (open("serialization\\network.pkl", "rb")) as file:
     network = pkl.load(file)
