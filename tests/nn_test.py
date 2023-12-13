@@ -138,6 +138,7 @@ def train_network(network: Neural_Network, training_data: [([float], [float])], 
         print("Epoch: ", i)
         for data_point in training_data:
             network.backpropagate(data_point, learning_rate)
+        print("Average error: ",network.calculate_average_output_error(training_data[random.randint(0, len(training_data)-1)]))
         print("\n")
 
 def train_network_with_mini_batches(network: Neural_Network, training_data: [([float], [float])], learning_rate: float, epochs: int, batch_size: int):

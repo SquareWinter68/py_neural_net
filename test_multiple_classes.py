@@ -5,10 +5,12 @@ import nn_source as nn
 import numpy as np
 import numpy as np
 import matplotlib.pyplot as plt
+import random
 
 def train_network(network, training_data: [([float], [float])], learning_rate: float, epochs: int):
     for i in range(epochs):
-        print("Epoch: ", i, end="\r")
+        #print("Epoch: ", i, end="\r")
+        print(f"Epoch: {i}\nAverage error: {network.calculate_average_output_error(training_data[random.randint(0, len(training_data)-1)])}\r")
         for data_point in training_data:
             network.backpropagate(data_point, learning_rate)
         
